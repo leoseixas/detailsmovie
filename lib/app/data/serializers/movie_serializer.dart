@@ -18,7 +18,7 @@ class MovieSerializer implements Movie {
     return {
       'title': title,
       'image': image,
-      'like': like,
+      'vote_count': like,
       'popularity': popularity,
     };
   }
@@ -26,8 +26,8 @@ class MovieSerializer implements Movie {
   factory MovieSerializer.fromMap(Map<String, dynamic> map) {
     return MovieSerializer(
       map['title'] ?? '',
-      map['image'] ?? '',
-      map['like']?.toDouble() ?? 0.0,
+      map['poster_path'] ?? '',
+      map['vote_count']?.toDouble() ?? 0.0,
       map['popularity']?.toDouble() ?? 0.0,
     );
   }

@@ -23,6 +23,12 @@ class DetailsMovieController with ChangeNotifier {
   bool _isFavorite = false;
   bool get isFavorite => _isFavorite;
 
+  bool _isFailureFindMovie = false;
+  bool get isFailureFindMovie => _isFailureFindMovie;
+
+  bool _isFailureFindListMovie = false;
+  bool get isFailureFindListMovie => _isFailureFindListMovie;
+
   Future<void> initializerScreen() async {
     _isLoading = true;
     notifyListeners();
@@ -34,14 +40,19 @@ class DetailsMovieController with ChangeNotifier {
 
   Future<void> getDetailsMovie() async {
     final result = await service.getDetailsMovie();
-    result.fold((l) => errorFindDetailsMovie = l, (r) => movie = r);
+    result.fold((l) {
+      errorFindDetailsMovie = l;
+      _isFailureFindMovie = true;
+    }, (r) => movie = r);
     notifyListeners();
   }
 
   Future<void> getListSimilarMovies() async {
     final result = await service.getListSimilarMovies();
-    result.fold(
-        (l) => errorFindListSimilarMovie = l, (r) => listSimilarMovies = r);
+    result.fold((l) {
+      errorFindListSimilarMovie = l;
+      _isFailureFindListMovie = true;
+    }, (r) => listSimilarMovies = r);
     notifyListeners();
   }
 

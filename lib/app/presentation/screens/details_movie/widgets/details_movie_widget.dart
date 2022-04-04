@@ -1,3 +1,4 @@
+import 'package:detailsmovie/app/core/constants/api_keys.dart';
 import 'package:detailsmovie/app/core/constants/app_text.dart';
 import 'package:detailsmovie/app/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class DetailsMovieWidget extends StatelessWidget {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
-                'https://image.tmdb.org/t/p/w500/${movie.image}',
+                '${ApiKeys.urlImage}${movie.image}',
               ),
               fit: BoxFit.cover,
             ),

@@ -1,3 +1,4 @@
+import 'package:detailsmovie/app/core/constants/api_keys.dart';
 import 'package:detailsmovie/app/core/constants/app_text.dart';
 import 'package:detailsmovie/app/domain/entities/similar_movies.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,7 @@ class ListMoviesSimilarWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-              'https://image.tmdb.org/t/p/w500/${similarMovies.image}'),
+          Image.network('${ApiKeys.urlImage}${similarMovies.image}'),
           SizedBox(width: 12),
           Expanded(
             child: Column(

@@ -1,5 +1,6 @@
 import 'package:detailsmovie/app/presentation/screens/details_movie/details_movie_controller.dart';
 import 'package:detailsmovie/app/presentation/screens/details_movie/widgets/details_movie_widget.dart';
+import 'package:detailsmovie/app/presentation/screens/details_movie/widgets/error_message_widget.dart';
 import 'package:detailsmovie/app/presentation/screens/details_movie/widgets/list_movies_similar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,35 +34,43 @@ class _DetailsMovieScreenState extends State<DetailsMovieScreen> {
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : Container(
-                  child: Column(
-                    children: [
-                      DetailsMovieWidget(
-                        movie: value.movie,
-                        like: () {
-                          value.favoriteMove(value.isFavorite);
-                        },
-                        isFavorite: value.isFavorite,
-                      ),
-                      SizedBox(height: 10),
-                      Expanded(
-                        child: Container(
-                          child: ListView.builder(
-                            padding: EdgeInsets.all(0),
-                            // physics: NeverScrollableScrollPhysics(),
-                            controller: value.pageController,
-                            itemCount: value.listSimilarMovies.length,
-                            itemBuilder: (context, index) {
-                              return ListMoviesSimilarWidget(
-                                similarMovies: value.listSimilarMovies[index],
-                              );
-                            },
+              : value.isFailureFindMovie
+                  ? ErrorMessageWidget(
+                      message: value.errorFindDetailsMovie.message,
+                    )
+                  : value.isFailureFindListMovie
+                      ? ErrorMessageWidget(
+                          message: value.errorFindListSimilarMovie.message,
+                        )
+                      : Container(
+                          child: Column(
+                            children: [
+                              DetailsMovieWidget(
+                                movie: value.movie,
+                                like: () {
+                                  value.favoriteMove(value.isFavorite);
+                                },
+                                isFavorite: value.isFavorite,
+                              ),
+                              SizedBox(height: 10),
+                              Expanded(
+                                child: Container(
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.all(0),
+                                    controller: value.pageController,
+                                    itemCount: value.listSimilarMovies.length,
+                                    itemBuilder: (context, index) {
+                                      return ListMoviesSimilarWidget(
+                                        similarMovies:
+                                            value.listSimilarMovies[index],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                        );
         },
       ),
     );

@@ -13,4 +13,15 @@ class AppText {
     fontWeight: FontWeight.w400,
     color: Colors.white,
   );
+
+  static final titleMovieSimilar = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+  );
+  static final dateMovieSimilar = GoogleFonts.poppins(
+    fontSize: 14,
+    fontWeight: FontWeight.w300,
+    color: Colors.white,
+  );
 }

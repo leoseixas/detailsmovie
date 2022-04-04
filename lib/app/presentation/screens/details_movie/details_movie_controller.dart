@@ -21,7 +21,7 @@ class DetailsMovieController with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   bool _isFavorite = false;
-  bool get isFavotite => _isFavorite;
+  bool get isFavorite => _isFavorite;
 
   Future<void> initializerScreen() async {
     _isLoading = true;

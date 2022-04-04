@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:detailsmovie/app/domain/entities/similar_movies.dart';
 
 class SimilarMoviesSerializer implements SimilarMovies {
-  final String data;
+  final DateTime data;
   final String image;
   final String title;
 
@@ -19,7 +19,7 @@ class SimilarMoviesSerializer implements SimilarMovies {
 
   factory SimilarMoviesSerializer.fromMap(Map<String, dynamic> map) {
     return SimilarMoviesSerializer(
-      data: map['release_date'] ?? '',
+      data: DateTime.parse(map['release_date']) ?? '',
       image: map['poster_path'] ?? '',
       title: map['title'] ?? '',
     );

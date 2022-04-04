@@ -18,7 +18,7 @@ class MovieRepositoryImpl implements MovieRepository {
           Movie(result.title, result.image, result.like, result.popularity);
       return Right(movie);
     } catch (e) {
-      throw Left(ErrorFindDetailsMovie(message: e.toString()));
+      return Left(e);
     }
   }
 
@@ -38,7 +38,7 @@ class MovieRepositoryImpl implements MovieRepository {
       }
       return Right(listSimilarMovies);
     } catch (e) {
-      throw Left(ErrorFindListSimilarMovie(message: e.toString()));
+      return Left(e);
     }
   }
 }

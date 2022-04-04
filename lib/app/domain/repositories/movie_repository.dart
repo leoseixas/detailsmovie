@@ -6,6 +6,6 @@ import 'package:detailsmovie/app/domain/entities/similar_movies.dart';
 abstract class MovieRepository {
   Future<Either<ErrorFindDetailsMovie, Movie>> getDetailsMovie();
 
-  Future<Either<ErrorFindDetailsMovie, List<SimilarMovies>>>
+  Future<Either<ErrorFindListSimilarMovie, List<SimilarMovies>>>
       getListSimilarMovies();
 }

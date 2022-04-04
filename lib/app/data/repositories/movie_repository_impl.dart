@@ -23,9 +23,22 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<ErrorFindDetailsMovie, List<SimilarMovies>>>
-      getListSimilarMovies() {
-    // TODO: implement getListSimilarMovies
-    throw UnimplementedError();
+  Future<Either<ErrorFindListSimilarMovie, List<SimilarMovies>>>
+      getListSimilarMovies() async {
+    List<SimilarMovies> listSimilarMovies = [];
+    try {
+      final result = await movieGateway.getListSimilarMovies();
+      for (var list in result) {
+        SimilarMovies movies = SimilarMovies(
+          title: list.title,
+          image: list.image,
+          data: list.data,
+        );
+        listSimilarMovies.add(movies);
+      }
+      return Right(listSimilarMovies);
+    } catch (e) {
+      throw Left(ErrorFindListSimilarMovie(message: e.toString()));
+    }
   }
 }

@@ -7,7 +7,7 @@ import 'package:detailsmovie/app/domain/repositories/movie_repository.dart';
 abstract class MovieService {
   Future<Either<ErrorFindDetailsMovie, Movie>> getDetailsMovie();
 
-  Future<Either<ErrorFindDetailsMovie, List<SimilarMovies>>>
+  Future<Either<ErrorFindListSimilarMovie, List<SimilarMovies>>>
       getListSimilarMovies();
 }
 
@@ -32,8 +32,22 @@ class MovieServiceImpl implements MovieService {
   }
 
   @override
-  Future<Either<ErrorFindDetailsMovie, List<SimilarMovies>>>
-      getListSimilarMovies() {
-    throw UnimplementedError();
+  Future<Either<ErrorFindListSimilarMovie, List<SimilarMovies>>>
+      getListSimilarMovies() async {
+    List<SimilarMovies> listSimilarMovies = [];
+    ErrorFindListSimilarMovie errorFindListSimilarMovie;
+
+    final result = await repository.getListSimilarMovies();
+    result.fold((l) => errorFindListSimilarMovie = l, (r) {
+      for (var list in r) {
+        listSimilarMovies.add(list);
+      }
+    });
+
+    if (result.isRight()) {
+      return Right(listSimilarMovies);
+    } else {
+      return Left(errorFindListSimilarMovie);
+    }
   }
 }

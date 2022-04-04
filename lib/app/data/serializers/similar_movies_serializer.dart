@@ -19,8 +19,8 @@ class SimilarMoviesSerializer implements SimilarMovies {
 
   factory SimilarMoviesSerializer.fromMap(Map<String, dynamic> map) {
     return SimilarMoviesSerializer(
-      data: map['data'] ?? '',
-      image: map['image'] ?? '',
+      data: map['release_date'] ?? '',
+      image: map['poster_path'] ?? '',
       title: map['title'] ?? '',
     );
   }
